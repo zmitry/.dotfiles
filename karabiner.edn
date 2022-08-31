@@ -1,0 +1,105 @@
+{:input-sources {:us {:language "en"}}
+;;  :simlayers {:period-mode {:key :period}}
+ :main [;; {:des "========= LAYER 0 (DEFAULT) =========="
+   ;;       :rules [;;Left shift alone | word left
+   ;;                ;; bottom row
+   ;;               [:##right_option :delete_or_backspace]
+   ;;                ;; home row
+   ;;               [:##j :h]
+   ;;               [:##k :j]
+   ;;               [:##l :k]
+   ;;               [:##semicolon :l]
+   ;;               [:##quote :semicolon]
+   ;;               [:##backslash :quote]
+   ;;                ;;right top
+   ;;               [:##u :y]
+   ;;               [:##i :u]
+   ;;               [:##o :i]
+   ;;               [:##p :o]
+   ;;               [:##open_bracket :p]
+   ;;               [:##close_bracket :open_bracket]
+   ;;                ;;right bottom
+   ;;               [:##slash :period]
+   ;;               [:##period :comma]
+   ;;               [:##comma :m]
+   ;;               [:##m :n]]}
+        {:des   "swap ; :"
+         :rules [[:p :!Sp [:us]]
+                 [:!Sp :p [:us]]
+                 [:!Rp :p [:us]]]}
+      ;;   {:des "period mode"
+      ;;    :rules [[:d :!S9 :period-mode] ;; .d insert (
+      ;;            [:f :!S0 :period-mode] ;; .f insert )
+      ;;            [:a [:!Sgrave_accent_and_tilde :slash] :period-mode] ;; .a insert ~/
+      ;;            [:s [:period :!S8] :period-mode]]}
+        {:des "Extend Layer - right  command"
+         :rules [[:##caps_lock ["extend" 1] [:!symbols :!mouse :!shifted :!system] {:afterup ["extend" 0] :alone :escape}]
+                 :extend
+                    ; functions
+                 [:##1 :f1] [:##2 :f2] [:##3 :f3] [:##4 :f4] [:##5 :f5] [:##6 :f6]
+                 [:##7 :f7] [:##8 :f8] [:##9 :f9] [:##0 :f10] [:##hyphen :f11] [:##equal_sign :f12]
+                    ; modiiers
+                 [:##a :left_control]
+                 [:##s :left_shift]
+                 [:##d :left_option]
+                 [:##f :left_command]
+                 [:##semicolon :!Fdelete_or_backspace]
+                 [:##n :!Odelete_or_backspace]
+                 [:##m :delete_or_backspace]
+               ;;   [:##g :return_or_enter]
+                    ; arrows
+                 [:##j :left_arrow]
+                 [:##k :down_arrow]
+                 [:##i :up_arrow]
+                 [:##l :right_arrow]
+                    ; shortcuts
+                 [:##u :!Cleft_arrow :!terminals]
+                 [:##o :!Cright_arrow :!terminals]
+                 [:##z :!Cgrave_accent_and_tilde]
+                 [:##x :!Cz]
+                 [:##c :!Cx]
+                 [:##v :!Cv]]}
+
+        {:des "right commands"
+         :rules [[:##right_command ["command" 1] [:!symbols :!mouse :!shifted :!system] {:afterup ["command" 0] :alone :!Qspacebar}]
+                 :command]}
+
+        {:des "W as numbers"
+         :rules [[:##w ["layerNum" 1] [:!symbols :!mouse :!shifted :!system] {:afterup ["layerNum" 0] :alone :w}]
+                 :layerNum
+                 [:##a :left_control]
+                 [:##s :left_shift]
+                 [:##d :left_option]
+                 [:##f :left_command]
+                 [:##semicolon :!Fdelete_or_backspace]
+                 [:##o :9]
+                 [:##i :8]
+                 [:##u :7]
+                 [:##l :6]
+                 [:##k :5]
+                 [:##j :4]
+                 [:##m :1]
+                 [:##comma :2]
+                 [:##period :3]
+                 [:##h :0]]}]}
+
+;; !  | means mandatory
+    ;; #  | means optional
+    ;; C  | left_command
+    ;; T  | left_control
+    ;; O  | left_option
+    ;; S  | left_shift
+    ;; F  | fn
+    ;; Q  | right_command
+    ;; W  | right_control
+    ;; E  | right_option
+    ;; R  | right_shift
+    ;; P  | caps_lock
+    ;; !! | mandatory command + control + optional + shift (hyper)
+    ;; ## | optional any
+
+    ;; examples
+
+    ;; !CTSequal_sign  | mandatory command control shift =
+    ;;                 | which is command control +
+    ;; !O#Sright_arrow | mandatory option optional any right_arrow
