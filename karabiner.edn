@@ -1,28 +1,30 @@
 {:input-sources {:us {:language "en"}}
 ;;  :simlayers {:period-mode {:key :period}}
- :main [;; {:des "========= LAYER 0 (DEFAULT) =========="
-   ;;       :rules [;;Left shift alone | word left
-   ;;                ;; bottom row
-   ;;               [:##right_option :delete_or_backspace]
-   ;;                ;; home row
-   ;;               [:##j :h]
-   ;;               [:##k :j]
-   ;;               [:##l :k]
-   ;;               [:##semicolon :l]
-   ;;               [:##quote :semicolon]
-   ;;               [:##backslash :quote]
-   ;;                ;;right top
-   ;;               [:##u :y]
-   ;;               [:##i :u]
-   ;;               [:##o :i]
-   ;;               [:##p :o]
-   ;;               [:##open_bracket :p]
-   ;;               [:##close_bracket :open_bracket]
-   ;;                ;;right bottom
-   ;;               [:##slash :period]
-   ;;               [:##period :comma]
-   ;;               [:##comma :m]
-   ;;               [:##m :n]]}
+ :main [
+        {:des "========= LAYER 0 (DEFAULT) =========="
+         :rules [;;Left shift alone | word left
+                  ;; bottom row
+               ;;   [:##right_option :delete_or_backspace]
+               ;;    ;; home row
+               ;;   [:##j :h]
+               ;;   [:##k :j]
+               ;;   [:##l :k]
+               ;;   [:##semicolon :l]
+               ;;   [:##quote :semicolon]
+               ;;   [:##backslash :quote]
+               ;;    ;;right top
+               ;;   [:##u :y]
+               ;;   [:##i :u]
+               ;;   [:##o :i]
+               ;;   [:##p :o]
+               ;;   [:##open_bracket :p]
+               ;;   [:##close_bracket :open_bracket]
+               ;;    ;;right bottom
+               ;;   [:##slash :period]
+               ;;   [:##period :comma]
+               ;;   [:##comma :m]
+               ;;   [:##m :n]
+                 ]}
         {:des   "swap ; :"
          :rules [[:p :!Sp [:us]]
                  [:!Sp :p [:us]]
@@ -65,7 +67,7 @@
                  :command]}
 
         {:des "W as numbers"
-         :rules [[:##w ["layerNum" 1] [:!symbols :!mouse :!shifted :!system] {:afterup ["layerNum" 0] :alone :w}]
+         :rules [[:##grave_accent_and_tilde ["layerNum" 1] [:!symbols :!mouse :!shifted :!system] {:afterup ["layerNum" 0] :alone :grave_accent_and_tilde}]
                  :layerNum
                  [:##a :left_control]
                  [:##s :left_shift]

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "ESNext"],
+    "strict": true,
+    // "noUncheckedIndexedAccess": true,
+    "noEmit": true
+  },
+  "include": ["."]
+}
