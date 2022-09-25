@@ -11,6 +11,7 @@ export type Key =
   | "left_option"
   | "left_shift"
   | "left_alt"
+  | "vk_none"
   | "left_gui"
   | "caps_lock"
   | "return_or_enter"
@@ -123,6 +124,10 @@ export type Key =
   | "keypad_plus";
 
 export type Mods =
+  | "command"
+  | "control"
+  | "option"
+  | "shift"
   | "left_command"
   | "left_control"
   | "left_option"
@@ -131,8 +136,7 @@ export type Mods =
   | "right_command"
   | "right_control"
   | "right_option"
-  | "right_shift"
-  | "caps_lock";
+  | "right_shift";
 
 export type FromEvent = {
   key_code: Key;
@@ -153,7 +157,19 @@ export type FromEvent = {
   };
 };
 
-export function key(key: Key, ...mods: Mods[]) {
+export function toKey(key: Key, ...mods: (Mods | undefined)[]) {
+  return {
+    key_code: key,
+    modifiers:
+      mods?.length > 0
+        ? mods
+        : {
+            optional: ["any"],
+          },
+  };
+}
+
+export function fromKey(key: Key, ...mods: (Mods | undefined)[]) {
   return {
     key_code: key,
     modifiers:
@@ -227,8 +243,9 @@ export async function writeToConfig(rules: any) {
 export function layer(
   name: string,
   key: Key,
-  alone_key: Key,
-  modifications: Modification[]
+  alone_key: ToEvent[] | undefined,
+  modifications: Modification[],
+  conditions?: any
 ) {
   return [
     {
@@ -253,6 +270,7 @@ export function layer(
           type: "variable_unless",
           value: 1,
         },
+        ...conditions,
       ],
       from: {
         key_code: key,
@@ -276,15 +294,15 @@ export function layer(
           },
         },
       ],
-      to_if_alone: [
-        {
-          key_code: alone_key,
-        },
-      ],
+      to_if_alone: alone_key ? alone_key : undefined,
       type: "basic",
+      parameters: {
+        "basic.to_if_alone_timeout_milliseconds": 150,
+      },
     },
     ...modifications.map((el) => ({
       conditions: [
+        ...(el.conditions ? el.conditions : []),
         {
           name: name,
           type: "variable_if",
@@ -394,12 +412,45 @@ export type KeysChangeArgs =
       type: "double_press";
       from: Key;
       to: ToEvent;
+    }
+  | {
+      type: "combo";
+      from: Array<Key>;
+      to: Key;
+      options?: {
+        detect_key_down_uninterruptedly?: boolean;
+        key_down_order?: "insensitive" | "strict" | "strict_inverse";
+        key_up_order?: "insensitive" | "strict" | "strict_inverse";
+        key_up_when?: "any" | "all";
+        to_after_key_up?: string;
+      };
     };
-export function change(mods: KeysChangeArgs[]) {
+
+export function change(mods: KeysChangeArgs[], conditions: any = undefined) {
   return [
     ...mods.map((el) => {
       if (el.type === "double_press") {
         return doublePress(el.type + "_" + el.from, el.from, el.to) as any;
+      }
+      if (el.type == "combo") {
+        return {
+          from: {
+            simultaneous: el.from.map((el) => ({
+              key_code: el,
+            })),
+            simultaneous_options: el.options,
+            modifiers: {
+              optional: ["any"],
+            },
+          },
+          to: [
+            {
+              key_code: el.to,
+            },
+          ].filter(Boolean),
+          conditions,
+          type: "basic",
+        };
       }
       if (el.type == "mod") {
         return {
@@ -412,12 +463,14 @@ export function change(mods: KeysChangeArgs[]) {
           to: [
             el.sticky
               ? {
+                  conditions,
                   sticky_modifier: {
                     [el.mod]: "toggle",
                   },
                 }
               : null,
             {
+              conditions,
               key_code: el.mod,
             },
           ].filter(Boolean),
@@ -433,6 +486,7 @@ export function change(mods: KeysChangeArgs[]) {
           },
           to: [
             {
+              conditions,
               key_code: el.to,
               modifiers: el.mods,
             },
