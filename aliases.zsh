@@ -15,3 +15,4 @@ alias gselect="gproj && gcluster"
 
 # git
 alias d="kitty +kitten diff"
+alias pr_open='gh pr view --web'
