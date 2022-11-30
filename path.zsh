@@ -6,3 +6,4 @@ export PATH="/opt/homebrew/opt/node@16/bin:$PATH"
 export GOKU_EDN_CONFIG_FILE="$HOME/.dotfiles/karabiner.edn"
 
 
+export PATH="/opt/homebrew/anaconda3/bin:$PATH"

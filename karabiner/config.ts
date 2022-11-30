@@ -1,4 +1,12 @@
-import { change, Rule, writeToConfig, layer, toKey, fromKey } from "./utils";
+import {
+  change,
+  Rule,
+  writeToConfig,
+  layer,
+  toKey,
+  fromKey,
+  changeV2,
+} from "./utils";
 
 const en_input_source = {
   input_sources: [
@@ -12,12 +20,22 @@ const rules: Rule[] = [
   {
     description: "nav layer",
     manipulators: [
+      ...changeV2(
+        {
+          open_bracket: "shift+quote",
+          "shift+period": "shift+p",
+          "shift+comma": "p",
+          p: "quote",
+          quote: "delete_or_backspace",
+        },
+        [en_input_source]
+      ),
       ...change(
         [
           {
             type: "combo",
             from: ["w", "e"],
-            to: "q",
+            to: "escape",
             options: {
               key_up_order: "strict_inverse",
             },
@@ -25,24 +43,6 @@ const rules: Rule[] = [
         ],
         [en_input_source]
       ),
-      {
-        type: "basic",
-        from: fromKey("quote"),
-        to: ["left_command", "left_control", "left_shift", "left_option"].map(
-          (el) => ({
-            sticky_modifier: {
-              [el]: "toggle",
-            },
-          })
-        ),
-        conditions: [
-          {
-            name: "spacebar_held",
-            type: "variable_if",
-            value: 1,
-          },
-        ],
-      },
       ...change([
         {
           type: "double_press",
@@ -64,6 +64,40 @@ const rules: Rule[] = [
           },
         ],
       },
+
+      ...layer(
+        "layer4",
+        "right_command",
+        undefined,
+        [
+          ...changeV2(
+            {
+              d: "hyphen",
+              q: "p",
+              g: "keypad_plus",
+              e: "equal_sign",
+              c: "shift+p",
+              a: "backslash",
+              w: "open_bracket",
+              r: "close_bracket",
+              f: "shift+close_bracket",
+              s: "shift+open_bracket",
+
+              x: "shift+8",
+              v: "slash",
+              u: "shift+comma",
+              o: "shift+period",
+              j: "shift+9",
+              l: "shift+0",
+              i: "shift+hyphen",
+              h: "shift+5",
+            },
+            []
+          ),
+        ],
+        [en_input_source]
+      ),
+
       ...layer(
         "layer3",
         "caps_lock",
@@ -101,7 +135,6 @@ const rules: Rule[] = [
             { type: "key", from: "spacebar", to: "return_or_enter" },
 
             { type: "key", from: "semicolon", to: "delete_or_backspace" },
-            { type: "key", from: "slash", to: "delete_or_backspace" },
             { type: "key", from: "h", to: "page_down" },
             { type: "key", from: "y", to: "page_up" },
             { type: "key", from: "n", to: "caps_lock" },
@@ -150,9 +183,9 @@ const rules: Rule[] = [
         undefined,
         [
           ...change([
-            { type: "mod", from: "j", mod: "left_command", sticky: true },
             { type: "mod", from: "k", mod: "left_option", sticky: true },
             { type: "mod", from: "l", mod: "left_shift", sticky: true },
+            { type: "mod", from: "j", mod: "left_command", sticky: true },
             {
               type: "mod",
               from: "semicolon",

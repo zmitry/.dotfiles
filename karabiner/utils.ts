@@ -138,6 +138,8 @@ export type Mods =
   | "right_option"
   | "right_shift";
 
+export type ShortMods = "command" | "control" | "option" | "shift";
+
 export type FromEvent = {
   key_code: Key;
   any: "key_code or consumer_key_code or pointing_button";
@@ -301,6 +303,7 @@ export function layer(
       },
     },
     ...modifications.map((el) => ({
+      ...el,
       conditions: [
         ...(el.conditions ? el.conditions : []),
         {
@@ -309,7 +312,6 @@ export function layer(
           value: 1,
         },
       ],
-      ...el,
       type: "basic",
     })),
   ];
@@ -497,4 +499,112 @@ export function change(mods: KeysChangeArgs[], conditions: any = undefined) {
       return "" as never;
     }),
   ].flat(1);
+}
+
+type shiftedKeys = `${`shift+` | ""}${Key}`;
+export type KeysChangeArgsV2 =
+  | {
+      type?: "key";
+      to: Key;
+      mods?: Mods[];
+    }
+  | {
+      type: "mod";
+      mod: Mods;
+      sticky?: boolean;
+    }
+  | {
+      type: "double_press";
+      to: ToEvent;
+    }
+  | `${`${ShortMods}+` | ""}${Key}`;
+
+type ModsMap = {
+  [key in shiftedKeys]?: KeysChangeArgsV2;
+};
+
+function parseKey(key: string) {
+  const mods = key.split("+");
+  return {
+    mods: mods.slice(0, -1).filter(Boolean) as Mods[],
+    key: mods.slice(-1)[0] as Key,
+  };
+}
+
+export function changeV2(mods: ModsMap, conditions: any = undefined) {
+  return Object.entries(mods).map(([from, el]) => {
+    if (typeof el === "string" || !el.type || el.type === "key") {
+      if (typeof el === "string") {
+        const to = parseKey(el);
+        const fromParsed = parseKey(from);
+        return {
+          conditions,
+          from: {
+            key_code: fromParsed.key as Key,
+            modifiers: fromParsed.mods.length
+              ? { mandatory: fromParsed.mods }
+              : {
+                  optional: ["any"],
+                },
+          },
+          to: [
+            {
+              key_code: to.key,
+              modifiers: to.mods,
+            },
+          ],
+          type: "basic",
+        };
+      }
+      return {
+        conditions,
+        from: {
+          key_code: from as Key,
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          {
+            key_code: el.to,
+            modifiers: el.mods,
+          },
+        ],
+        type: "basic",
+      };
+    }
+    if (el.type === "double_press") {
+      return doublePress(
+        el.type + "_" + (from as any),
+        from as any,
+        el.to
+      ) as any;
+    }
+
+    if (el.type == "mod") {
+      return {
+        conditions,
+        from: {
+          key_code: from as Key,
+          modifiers: {
+            optional: ["any"],
+          },
+        },
+        to: [
+          el.sticky
+            ? {
+                sticky_modifier: {
+                  [el.mod]: "toggle",
+                },
+              }
+            : null,
+          {
+            key_code: el.mod,
+          },
+        ].filter(Boolean),
+        type: "basic",
+      };
+    }
+    return "" as never;
+  });
 }
