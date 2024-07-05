@@ -1,0 +1,1 @@
+cat ~/Documents/Production.csv | python3 -c 'import csv, json, sys; print(json.dumps([dict(r) for r in csv.DictReader(sys.stdin)]))' | jq '[.[] | { key: .Project, value: . }] | from_entries' | jq --arg Key $1 '.["\($Key)"]'

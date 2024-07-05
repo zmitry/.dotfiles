@@ -66,30 +66,31 @@ const rules: Rule[] = [
       },
 
       ...layer(
-        "layer4",
+        "sym",
         "right_command",
         undefined,
         [
           ...changeV2(
             {
-              d: "hyphen",
+              d: "shift+p",
               q: "p",
-              g: "keypad_plus",
-              e: "equal_sign",
+              g: "equal_sign",
+              k: "shift+hyphen",
               c: "shift+p",
-              a: "backslash",
+              a: "shift+4",
               w: "open_bracket",
               r: "close_bracket",
               f: "shift+close_bracket",
               s: "shift+open_bracket",
-
+              e: "backslash",
+              semicolon: "hyphen",
               x: "shift+8",
-              v: "slash",
+              v: "backslash",
               u: "shift+comma",
               o: "shift+period",
               j: "shift+9",
               l: "shift+0",
-              i: "shift+hyphen",
+              i: "slash",
               h: "shift+5",
             },
             []
@@ -172,82 +173,6 @@ const rules: Rule[] = [
               from: "v",
               to: "v",
               mods: ["left_command"],
-            },
-          ]),
-        ],
-        []
-      ),
-      ...layer(
-        "sym",
-        "right_command",
-        undefined,
-        [
-          ...change([
-            { type: "mod", from: "k", mod: "left_option", sticky: true },
-            { type: "mod", from: "l", mod: "left_shift", sticky: true },
-            { type: "mod", from: "j", mod: "left_command", sticky: true },
-            {
-              type: "mod",
-              from: "semicolon",
-              mod: "left_control",
-              sticky: true,
-            },
-            {
-              type: "key",
-              from: "t",
-              to: "non_us_backslash",
-              mods: ["shift"],
-            },
-            {
-              type: "key",
-              from: "q",
-              to: "escape",
-            },
-            {
-              type: "key",
-              from: "e",
-              to: "open_bracket",
-            },
-            {
-              type: "key",
-              from: "r",
-              to: "close_bracket",
-            },
-            {
-              type: "key",
-              from: "d",
-              to: "open_bracket",
-              mods: ["shift"],
-            },
-            {
-              type: "key",
-              from: "f",
-              to: "close_bracket",
-              mods: ["shift"],
-            },
-            {
-              type: "key",
-              from: "c",
-              to: "9",
-              mods: ["shift"],
-            },
-            {
-              type: "key",
-              from: "v",
-              to: "0",
-              mods: ["shift"],
-            },
-            {
-              type: "key",
-              from: "u",
-              to: "comma",
-              mods: ["shift"],
-            },
-            {
-              type: "key",
-              from: "i",
-              to: "period",
-              mods: ["shift"],
             },
           ]),
         ],
