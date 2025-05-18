@@ -1,0 +1,156 @@
+# Core Utilities
+# Essential command-line tools.
+brew "coreutils" # GNU core utilities
+brew "findutils"
+brew "gawk"
+brew "netpbm"
+brew "gts"
+brew "htop" # Interactive process viewer
+brew "ipcalc"
+brew "jq" # Command-line JSON processor
+brew "parallel"
+brew "ripgrep" # Fast search tool
+brew "tldr" # Simplified and community-driven man pages
+brew "tmux" # Terminal multiplexer
+brew "tree" # Display directory structure
+brew "watchman" # File system monitoring service
+brew "yq" # Command-line YAML processor
+brew "z" # Jump quickly to directories
+
+# Programming Languages
+# Development tools and language runtimes.
+brew "argocd"
+brew "aria2"
+brew "pycparser"
+brew "cffi"
+brew "python@3.13"
+brew "awscli"
+brew "azure-cli"
+brew "bat"
+brew "black"
+brew "boost"
+brew "buf"
+brew "caddy"
+brew "glib"
+brew "cairo"
+brew "node"
+brew "cdktf"
+brew "yamale"
+brew "chart-testing"
+brew "cloudflared"
+brew "conftest"
+brew "cookiecutter"
+brew "csvq"
+brew "cue"
+brew "curl"
+brew "deno"
+brew "dive"
+brew "duckdb"
+brew "folly"
+brew "fizz"
+brew "wangle"
+brew "fbthrift"
+brew "fb303"
+brew "edencommon"
+brew "wxwidgets"
+brew "erlang"
+brew "go"
+brew "gobject-introspection"
+brew "golangci-lint"
+brew "gox"
+brew "librsvg"
+brew "haskell-stack"
+brew "helm"
+brew "libheif"
+brew "libraw"
+brew "ipython"
+brew "jsonnet"
+brew "jsonschema", link: false
+brew "jupyterlab"
+brew "just"
+brew "lcov"
+brew "libav"
+brew "librdkafka"
+brew "libsolv"
+brew "libxcrypt"
+brew "libzip"
+brew "llvm"
+brew "loc"
+brew "luv"
+brew "micromamba"
+brew "mypy"
+brew "neovim"
+brew "nss"
+brew "openjdk"
+brew "pipx"
+brew "pnpm"
+brew "postgresql@14"
+brew "pulumi"
+brew "python-lsp-server"
+brew "tcl-tk"
+brew "redis", restart_service: :changed
+brew "rust"
+brew "sapling"
+brew "skaffold"
+brew "sops"
+brew "sqlc"
+brew "stockfish"
+brew "subversion"
+brew "terraform-docs"
+brew "wrangler"
+brew "wrk"
+brew "yamllint"
+brew "yarn"
+brew "youplot"
+
+# Cloud and DevOps
+# Tools for cloud computing and DevOps practices.
+brew "k9s"
+brew "ko"
+brew "kubernetes-cli"
+brew "krew"
+brew "opa"
+
+# Data Science
+# Tools for data analysis and manipulation.
+brew "duckdb"
+
+# Networking
+# Tools for network analysis and troubleshooting.
+brew "cloudflared"
+brew "curl"
+brew "mkcert"
+brew "tcptraceroute"
+brew "telnet"
+
+# Security
+# Security-related tools.
+brew "sops"
+
+# Image Processing
+brew "exiftool"
+brew "libavif"
+brew "gd"
+brew "gdk-pixbuf"
+brew "harfbuzz"
+brew "openjpeg"
+brew "pango"
+brew "ghostscript"
+brew "imagemagick"
+brew "uv"
+
+# Git Tools
+brew "git"
+brew "git-lfs"
+
+# File Management
+brew "fasd"
+brew "fd"
+brew "fpp"
+brew "fswatch"
+brew "fzf"
+
+# Third-Party Taps
+# Formulae installed from third-party taps.
+brew "hashicorp/tap/terraform"
+brew "oven-sh/bun/bun"

@@ -1,0 +1,33 @@
+# Taps
+# Taps are external repositories for Homebrew.
+# https://docs.brew.sh/Taps
+
+tap "candid82/brew"
+tap "cloudflare/cloudflare"
+tap "cube2222/octosql"
+tap "datawire/blackbird"
+tap "dbt-labs/dbt"
+tap "gromgit/fuse"
+tap "hashicorp/tap"
+tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
+tap "homebrew/services"
+tap "humansignal/tap"
+tap "kegworks-app/kegworks"
+tap "kubeshark/kubeshark"
+tap "laishulu/macism"
+tap "nikitabobko/tap"
+tap "oven-sh/bun"
+tap "pulumi/tap"
+tap "redpanda-data/tap"
+tap "romkatv/gitstatus"
+
+# Core Utilities
+# Essential command-line tools.
+brew "libtiff"
+brew "little-cms2"
+brew "webp"
+brew "jpeg-xl"
+brew "aom"
+brew "apr-util"

@@ -1,0 +1,32 @@
+# Casks
+# Graphical applications.
+cask "1password" # Password manager
+cask "1password-cli"
+cask "anaconda"
+cask "bitwarden" # Password manager
+cask "docker" # Containerization platform
+cask "font-3270-nerd-font"
+cask "font-fira-code-nerd-font"
+cask "font-inconsolata"
+# cask "font-iosevka"
+# cask "godot"
+cask "google-chrome" # Web browser
+cask "google-cloud-sdk"
+cask "karabiner-elements" # Keyboard customization tool
+# cask "kegworks"
+# cask "kitty" # Terminal emulator
+# cask "macfuse"
+cask "notion" # Note-taking and project management
+# cask "postman" # API development tool
+cask "raycast" # Spotlight replacement
+# cask "signal" # Encrypted messaging app
+cask "slack" # Team communication platform
+# cask "steam" # Game distribution platform
+cask "telegram" # Messaging app
+# cask "tunnelblick"
+# cask "ukelele"
+cask "visual-studio-code" # Code editor
+cask "vlc" # Media player
+cask "warp" # Terminal
+# cask "wine-stable"
+cask "zoom" # Video conferencing
