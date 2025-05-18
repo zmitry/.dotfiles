@@ -102,6 +102,7 @@ brew "wrk"
 brew "yamllint"
 brew "yarn"
 brew "youplot"
+brew "ollama"
 
 # Cloud and DevOps
 # Tools for cloud computing and DevOps practices.
