@@ -8,12 +8,12 @@
 	<string></string>
 	<key>CFBundleVersion</key>
 	<string></string>
-	<key>KLInfo_Colemak DH ISO - Extended copy</key>
+	<key>KLInfo_Colemak DH</key>
 	<dict>
 		<key>TICapsLockLanguageSwitchCapable</key>
 		<false/>
 		<key>TISInputSourceID</key>
-		<string>org.sil.ukelele.keyboardlayout..colemakdhiso-extendedcopy</string>
+		<string>org.sil.ukelele.keyboardlayout..colemakdh</string>
 		<key>TISIntendedLanguage</key>
 		<string>en</string>
 	</dict>
